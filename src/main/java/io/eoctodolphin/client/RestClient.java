@@ -19,7 +19,7 @@ public class RestClient {
     final private HttpClient httpClient;
 
     public Optional<HttpResponse> get(URI uri, Map<String, String> headers) {
-        HttpRequestBase requestBase= new HttpGet(uri);
+        HttpRequestBase requestBase = new HttpGet(uri);
         addHeaders(requestBase, headers);
         try {
             return Optional.of(httpClient.execute(requestBase));
@@ -29,9 +29,9 @@ public class RestClient {
         }
     }
 
-    void addHeaders(HttpRequestBase requestBase, Map<String, String> headers){
-        if(headers!= null){
-        headers.entrySet().forEach(entry -> requestBase.addHeader(entry.getKey(), entry.getValue()));
+    void addHeaders(HttpRequestBase requestBase, Map<String, String> headers) {
+        if (headers != null) {
+            headers.entrySet().forEach(entry -> requestBase.addHeader(entry.getKey(), entry.getValue()));
         }
     }
 
