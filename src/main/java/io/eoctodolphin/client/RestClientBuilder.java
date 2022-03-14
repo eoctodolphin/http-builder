@@ -8,16 +8,18 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 
 import lombok.Builder;
+import lombok.Getter;
 
 @Builder
-public class ClientBuilder {
+@Getter
+public class RestClientBuilder {
 
     @Builder.Default
     private int connectionTimeoutMs = -1;
     @Builder.Default
     private int timeoutMs = -1;
 
-    public Client generateClient() {
+    public RestClient generateClient() {
         HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
         RequestConfig.Builder config = RequestConfig.custom();
         config.setConnectTimeout(connectionTimeoutMs);
@@ -28,6 +30,6 @@ public class ClientBuilder {
             deafultHeaders.add(new BasicHeader("Request-Timeout", String.valueOf(timeoutMs)));
         }
         httpClientBuilder.setDefaultHeaders(deafultHeaders);
-        return new Client(httpClientBuilder.setDefaultRequestConfig(config.build()).build());
+        return new RestClient(httpClientBuilder.setDefaultRequestConfig(config.build()).build());
     }
 }
